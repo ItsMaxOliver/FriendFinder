@@ -11,10 +11,26 @@ app.use(bodyParser.json());
 
 apiRouter.post("/api/friends", function(req, res) {
     var newFriend = req.body;
+    var totalDiff = 0;
+    var totalDiffArr = [];
+    var match = 0;;
+    
     for (var i = 0; i < newFriend.scores.length; i++) {
         newFriend.scores[i] = parseInt(newFriend.scores[i]);
     }
     friends.push(newFriend);
+    
+    for (var i = 0; i < friends.length - 1; i++) { // for the length of all friend objects minus the last one entered (current user)
+        for (var j = 0; j < newFriend.scores.length; j++) { //loops through the length of scores to compare the correct inputs
+            totalDiff =+ Math.abs(newFriend.scores[j] - friends[i].scores[j])
+        }
+        totalDiffArr.push(totalDiff);
+        console.log(totalDiffArr); // prints new array after every loop through
+    }
+    match = (totalDiffArr.indexOf(Math.min.apply(Math, totalDiffArr)));
+    bestMatch = friends[match];
+    //find lowest totalDiff and set that person to match
+    res.json(bestMatch);
 });
 
 apiRouter.get("/api/friends", function(req, res) {
