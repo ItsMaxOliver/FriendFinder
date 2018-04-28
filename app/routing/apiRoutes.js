@@ -25,7 +25,6 @@ apiRouter.post("/api/friends", function(req, res) {
             totalDiff =+ Math.abs(newFriend.scores[j] - friends[i].scores[j])
         }
         totalDiffArr.push(totalDiff);
-        console.log(totalDiffArr); // prints new array after every loop through
     }
     match = (totalDiffArr.indexOf(Math.min.apply(Math, totalDiffArr)));
     bestMatch = friends[match];

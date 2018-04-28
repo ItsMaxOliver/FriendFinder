@@ -7,7 +7,7 @@ var apiRouter = require("./app/routing/apiRoutes.js");
 var friends = require("./app/data/friends.js");
 
 var app = express();
-var PORT = 4444;
+var PORT = process.env.PORT || 4444;
 
 app.listen(PORT, function() {
     console.log("App is listening on PORT " + PORT);
